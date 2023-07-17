@@ -29,20 +29,20 @@ class LoginController extends Controller
     {
         return view(route('login'));
     }
-    
+
     public function authenticate(AuthLoginRequest $req)
     {
 
-        $credentials = $req->only('email', 'password');
-        // $credentials = $req->getCredentials();
+        // $credentials = $req->only('email', 'password');
+        // // $credentials = $req->getCredentials();
 
-        if(!Auth::validate($credentials)){
-            return redirect(route('login'))
-                ->withErrors(trans('auth.failed'));
-        }else{
-            return redirect()->intended(route('get.patients'));
+        // if(!Auth::validate($credentials)){
+        //     return redirect(route('login'))
+        //         ->withErrors(trans('auth.failed'));
+        // }else{
+        //     return redirect()->intended('/patients/all');
 
-        }
+        // }
 
         // $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
@@ -51,36 +51,43 @@ class LoginController extends Controller
         // return $this->authenticated($req, $user);
 
 
-        // $req->validate([
-        //     'email' => 'required',
-        //     'password' => 'required|min:6',
-        // ]);
-        // $credentials = $req->only(['email','password']);
+        $req->validate([
+            'email' => 'required',
+            'password' => 'required|min:6',
+        ]);
+        $credentials = $req->only(['email', 'password']);
 
-    
-        //     // $uname = $req->username;
-        //     // $pass = str_replace(' ','',$req->password);
-    
-        //     // $user = User::where('email','=',$uname)->first();
-    
-        //     if(Auth::attempt($credentials)){
-        //         $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        //         // return redirect()->int;
-        //         // return $this->authenticated($request, $user);
-        //         Auth::user($user);
-        //         return redirect(route('get.patients'));
-        //     }else{
-        //         return back()->with('login_fail','Wrong credentials provided.');
-        //     }
+
+        // $uname = $req->username;
+        // $pass = str_replace(' ','',$req->password);
+
+        // $user = User::where('email','=',$uname)->first();
+
+        $user_data = array(
+            'email'  => $req->get('email'),
+            'password' => $req->get('password')
+        );
+
+        if (Auth::attempt($user_data)) {
+            $user = Auth::getProvider()->retrieveByCredentials($user_data);
+            // return redirect()->int;
+            // return $this->authenticated($request, $user);
+            // Auth::setUser($user);
+            // Auth::user($user);
+            $req->session()->regenerate();
+            return redirect('/patients/all');
+            // return redirect(route('get.patients'));
+        } else {
+            return back()->with('login_fail', 'Wrong credentials provided.');
+        }
 
 
         // $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user) 
-    {
-        return redirect(route('get.patients'));
-    }
+    // protected function authenticated(Request $request, $user){
+    //     return redirect(route('get.patients'));
+    // }
     /**
      * Where to redirect users after login.
      *
@@ -93,9 +100,5 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-        $this->middleware('guest')->except('logout');
-    }
+    
 }

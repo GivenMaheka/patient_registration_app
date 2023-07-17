@@ -10,10 +10,10 @@ use App\Models\Patients;
 use App\Models\User;
 use App\Models\Visits;
 use App\Models\VitalDetails;
+use Illuminate\Support\Facades\Crypt;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Factory;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\File as FacadesFile;
@@ -22,12 +22,9 @@ use Symfony\Component\Console\Input\Input;
 
 class patient_registration_app extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+   
     public $FILE_NAME = "temp_store_data.json"; // 
+
 
     public function VitalRedirection($bmi)
     {
@@ -113,13 +110,13 @@ class patient_registration_app extends Controller
         auth()->logout();
         return redirect('/');
     }
-    public function GetPatients(Request $req)
-    {
+    // public function GetPatients(Request $req)
+    // {
 
-        $patients = Patients::all();
+    //     $patients = Patients::all();
 
-        return view('layouts/patients/patientList', ['data' => $patients, 'user' => auth()->user()]);
-    }
+    //     return view('layouts/patients/patientList', ['data' => $patients, 'user' => json_encode($this->AUTH_USER)]);
+    // }
 
     public function CancelVital(Request $request)
     {
@@ -219,53 +216,6 @@ class patient_registration_app extends Controller
 
     }
 
-    public function StaffAuthentication(LoginRequest $req)
-    {
-
-        $req->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $credentials = $req->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            $user = User::where('email','=',$req->email)->first();
-            $req->session()->put('user',$user);
-            return redirect()->intended('/patients/all')
-                        ->with('auth',Auth::user());
-        }
-
-        return redirect(route("login"))->withSuccess('Login details are not valid');
-
-        // $req->authenticate($req);
-        // $req->session()->regenerate();
-        // return redirect()->intended(RouteServiceProvider::HOME);
-        
-
-        // $uname = $req->email;
-        // $pass = str_replace(' ','',$req->password);
-
-        // $user = User::where('email','=',$uname)->first();
-
-        // if (auth()->attempt($req->only(['email', 'password']))) {
-        //     return redirect('/patients/all');
-        // } else {
-        //     return back()->with('login_fail', 'User does not exist. Contact the Admin.');
-        // }
-
-        // if($user){
-        //     if($pass == Crypt::decrypt($user->password)){
-        //         $req->session()->put('user',$user);
-
-        //         // return redirect(route('get.patients'))->with('user',Session);
-        //     }else{
-        //         return back()->with('login_fail','Wrong username or Password');
-        //     }
-        // }else{
-        //     return back()->with('login_fail','User does not exist. Contact the Admin.');
-        // }
-    }
-
     public function registerPatients(Request $request)
     {
         $p_id = "PT-" . rand(1000, 10000);
@@ -318,16 +268,6 @@ class patient_registration_app extends Controller
         }
     }
 
-    protected $user;
 
-    // public function __construct()
-    // {
-
-    //     $this->middleware(function ($request, $next) {
-
-    //         $this->user = Auth::user();
-
-    //         return $next($request);
-    //     });
-    // }
+    
 }

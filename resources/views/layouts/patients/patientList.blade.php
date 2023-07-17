@@ -3,9 +3,8 @@
 <div class=' mt-5 mx-5 self-center  bg-white shadow-md rounded-md  md:py-4 h-max
             relative overflow-x-auto py-2 px-3'>
     
-    {{json_encode(Auth::user())}}
-    {{json_encode($user)}}
-
+    
+    <p>{{$user}}</p>
     <a href="{{route('logout')}}">Logout</a>
     <div class="mb-4 px-4 flex flex-row-reverse">
         <input class="outline-none py-2 px-3 border-b border-gray-300" type="text" id="" placeholder="Search...">

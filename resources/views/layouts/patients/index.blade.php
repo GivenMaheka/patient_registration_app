@@ -32,11 +32,7 @@
                         <p class="text-slate-300">Help Desk</p>
                     </div>
                     <div class=" md:hidden p-1 h-6 cursor-pointer text-slate-400 grid place-items-center fa fa-bars">
-                        <svg viewbox="0 0 100 80" class="w-5">
-                            <rect fill="#707b83" width="100" height="20"></rect>
-                            <rect fill="#707b83" y="30" width="100" height="20"></rect>
-                            <rect fill="#707b83" y="60" width="100" height="20"></rect>
-                        </svg>
+                        
                     </div>
                 </div>
             </div>

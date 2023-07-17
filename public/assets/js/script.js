@@ -23,7 +23,7 @@ function ShowComments(e){
 
     let tr = document.createElement('tr')
     tr.classList.add('commentRow')
-    tr.classList.add('bg-slate-700')
+    tr.classList.add('bg-slate-900')
 
     tr.innerHTML = `<td colspan="${thead}" class="py-2 px-4"><p>${value}</p></td>`
     if(commentNode){
