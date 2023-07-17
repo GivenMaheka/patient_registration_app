@@ -25,7 +25,7 @@ function ShowComments(e){
     tr.classList.add('commentRow')
     tr.classList.add('bg-slate-900')
 
-    tr.innerHTML = `<td colspan="${thead}" class="py-2 px-4 bg-[#065884"><p>${value}</p></td>`
+    tr.innerHTML = `<td colspan="${thead}" class="py-2 px-4 bg-[#065884]"><p>${value}</p></td>`
     if(commentNode){
         if(commentNode.classList.contains('commentRow')){
             tbody.removeChild(commentNode)
