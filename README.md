@@ -1,4 +1,4 @@
-create DB named patient_app or any prefered name but make sure you modify the .env file.
+create DB named patient_app or any preferred name but make sure you modify the .env file.
 
 the run these commands:
 1) composer install
