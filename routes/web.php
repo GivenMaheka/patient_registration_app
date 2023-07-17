@@ -26,6 +26,7 @@ Route::group(['middleware' => ['guest']], function () {
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('auth.staff');
 
 // Route::middleware('auth')->group(function(){
+    
 
     Route::get('/sign-out', [patient_registration_app::class, 'LogOut'])->name('logout');
 
