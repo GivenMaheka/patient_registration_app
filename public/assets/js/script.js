@@ -36,3 +36,45 @@ function ShowComments(e){
         tbody.insertBefore(tr,commentNode)
     }
 }
+
+function FilterData(e,filterBy="all") {
+    var input, filter, table, tbody, tr, td, i, txtValue, cell;
+    input = e.target.value.toLowerCase();
+    
+    tbody = document.querySelector("tbody");
+    tr = tbody.querySelectorAll("tr");
+    
+
+    if(filterBy == "date"){
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector(".date-val");
+            if (td) {
+                txtValue = td.innerText.includes(input);
+                if (txtValue) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }else{
+        for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "none";
+            td = tr[i].getElementsByTagName("td");
+            
+            for (j = 0; j < td.length; j++) {
+                cell = td[j]
+
+                if (cell) {
+                    if (cell.innerText.toLowerCase().indexOf(input) > -1) {
+
+                        tr[i].style.display = "";
+                        break;
+                    }else {
+                        tr[i].style.display = "none";
+                    }
+                } 
+            }
+        }
+    }
+}

@@ -28,6 +28,11 @@ body{
 thead tr th{ cursor:pointer}
 td{ position:relative; }
 
+@media (min-width: 770px) {
+    .menuContainer{
+        left: 0%;
+    }
+}
 @media (max-width: 460px) {
     thead{
         display: none;

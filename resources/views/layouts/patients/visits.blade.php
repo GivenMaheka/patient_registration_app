@@ -2,8 +2,8 @@
 @section('content')
 <div class=' mt-5 mx-5 self-center  bg-white shadow-md rounded-md  md:py-4 h-max
             relative overflow-x-auto py-2 px-3'>
-    <div class="mb-4 px-4 flex flex-row-reverse">
-        <input class="outline-none py-2 px-3 border-b border-gray-300" type="text" id="" placeholder="Search...">
+    <div class="mb-4 px-4 flex flex-col relative">
+        <input class="outline-none py-2 px-3 border-b border-gray-300 text-gray-500" type="text" id="searchInput" placeholder="Filter by Date..." onkeyup="FilterData(event,'date')">
     </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-sm">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  dark:text-gray-400 w-full">
@@ -32,20 +32,22 @@
                 <td data-col="Health" class="px-2 py-4 capitalize">{{$patient->health}}</td>
                 <td data-col="On Drugs" class="px-2 py-4 capitalize">{{empty($patient->onDrugs)?'-':$patient->onDrugs}}</td>
                 <td data-col="On Diet" class="px-2 py-4 capitalize">{{empty($patient->onDiet)?'-':$patient->onDiet}}</td>
-                <td data-col="Date" class="px-2 py-4">{{$patient->date}}</td>
+                <td data-col="Date" class="date-val px-2 py-4">{{$patient->date}}</td>
                 <td data-col="BMI" class="px-2 py-4 capitalize">
                     <span class='w-full top-0 mr-2 {{($patient->bmiVal < 18.5) ? "text-red-700" : (($patient->bmiVal > 18.5 && $patient->bmiVal < 25) ? "text-green-500" : "text-blue-700")}}'>{{$patient->bmiVal}}</span>
                     {{$patient->bmi}}
                 </td>
                 <td class="px-2 py-4 text-blue-900 cursor-pointer view-comments" onclick="ShowComments(event)">
-                More
-                <p class="hidden">{{$patient->comments}}</p>
-            </td>
+                    More
+                    <p class="hidden">{{$patient->comments}}</p>
+                </td>
             </tr>
-            
-            
+
+
             @endforeach
         </tbody>
     </table>
 </div>
+
+
 @endsection

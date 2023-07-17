@@ -11,27 +11,28 @@
 </head>
 
 <body class="w-full h-screen bg-gray-200 flex">
-    <div class="w-60 top-0 left-[-100%] absolute md:relative md:left-[0%] overflow-hidden h-full bg-[#1b709e]">
-        <nav class="">
-            <ul class="m-0 text-slate-200">
+    <div class="menuContainer flex left-[-100%] z-[5] md:z-[1] md:left-[0%] w-full md:w-60 top-0 absolute md:relative overflow-hidden h-full">
+        <nav class="md:w-full w-60 h-full flex flex-col justify-between bg-[#1b709e]">
+            <ul class="m-0 text-slate-200 grid gap-3 pt-10">
                 <li class="py-3 px-4">Dashboard</li>
-                <li class="py-3 px-4">New Patient</li>
-                <li class="py-3 px-4">Visits</li>
-                <li class="py-3 px-4">{{Auth::user()}}</li>
+                <li><a href="{{route('newPatient')}}" class="block py-3 px-4">Patient Registration</a></li>
+                <li class="bg-white text-[#1b709e]"><a href="{{route('get.visits')}}" class="block py-3 px-4">Patient Visit Details</a></li>
             </ul>
-
+            <a class="w-full py-2 px-4 bg-red-900 hover:bg-red-800 text-white" href="{{route('logout')}}">Logout</a>
         </nav>
+        <div class="md:hidden h-full w-full bg-[rgba(176,195,215,0.5)]"></div>
+        <div class="md:hidden absolute top-5 right-5 p-1 rounded-xl text-blue-900 cursor-pointer text-lg" onclick="menuContainer()">X</div>
     </div>
     <main class="w-full h-screen overflow-auto flex flex-col justify-between">
         <div class="main-container w-full">
-            <div class="h-max items-center mb-3 bg-white p-2 flex justify-between sticky top-0 z-10">
-                <div class="logo px-2">Logo</div>
+            <div class="h-max items-center mb-3 bg-white p-2 flex justify-between sticky top-0 z-[4]">
+                <div class="logo px-2 font-extrabold text-xl tracking-wider text-[#1b709e]">Logo</div>
                 <div class="flex gap-4 items-center mr-3">
                     <div class="flex gap-3 items-center content-center">
                         <img class="rounded-full w-10 h-10 shadow-md" src="https://static.vecteezy.com/system/resources/thumbnails/002/737/789/small_2x/medical-doctor-visiting-patient-illustration-concept-free-vector.jpg" alt="">
-                        <p class="text-slate-300">Help Desk</p>
+                        <p class="text-slate-300">{{Auth::user()->first_name}}</p>
                     </div>
-                    <div class=" md:hidden p-1 h-6 cursor-pointer text-slate-400 grid place-items-center fa fa-bars">
+                    <div onclick="menuContainer()" class=" md:hidden p-1 h-6 cursor-pointer text-slate-400 grid place-items-center fa fa-bars">
                         
                     </div>
                 </div>
@@ -74,5 +75,15 @@
                 .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
                 .forEach(tr => tbody.appendChild(tr));
         })))
+
+        function menuContainer(){
+            let menu = document.querySelector('.menuContainer');
+
+            if(menu.getBoundingClientRect().left < 0){
+                menu.style.left = '0%';
+            }else{
+                menu.style.left = '-100%';
+            }
+        }
     
 </script>

@@ -110,13 +110,13 @@ class patient_registration_app extends Controller
         auth()->logout();
         return redirect('/');
     }
-    // public function GetPatients(Request $req)
-    // {
+    public function GetPatients(Request $req)
+    {
 
-    //     $patients = Patients::all();
+        $patients = Patients::all();
 
-    //     return view('layouts/patients/patientList', ['data' => $patients, 'user' => json_encode($this->AUTH_USER)]);
-    // }
+        return view('layouts/patients/patientList', ['data' => $patients]);
+    }
 
     public function CancelVital(Request $request)
     {

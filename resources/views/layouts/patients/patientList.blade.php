@@ -3,11 +3,8 @@
 <div class=' mt-5 mx-5 self-center  bg-white shadow-md rounded-md  md:py-4 h-max
             relative overflow-x-auto py-2 px-3'>
     
-    
-    <p>{{$user}}</p>
-    <a href="{{route('logout')}}">Logout</a>
-    <div class="mb-4 px-4 flex flex-row-reverse">
-        <input class="outline-none py-2 px-3 border-b border-gray-300" type="text" id="" placeholder="Search...">
+    <div class="mb-4 px-4 flex flex-col relative">
+        <input class="outline-none py-2 px-3 border-b border-gray-300 text-gray-500" type="text" id="searchInput" placeholder="Search..." onkeyup="FilterData(event)">
     </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-sm">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  dark:text-gray-400 w-full">

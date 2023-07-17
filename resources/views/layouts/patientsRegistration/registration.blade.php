@@ -8,7 +8,7 @@
 </head>
 <body class="w-full h-screen bg-gray-200">
     <main class="w-full h-full flex flex-col justify-stretch">
-        <div class='w-8/12 mt-5 self-center flex flex-col-reverse flex-grow md:flex-row bg-white shadow-md rounded-3xl md:px-3 md:py-8 p-0 h-max'>
+        <div class='w-11/12 md:w-8/12 mt-5 self-center flex flex-col-reverse flex-grow md:flex-row bg-white shadow-md rounded-3xl md:px-3 md:py-8 p-0 h-max'>
             <form action="{{route('new.patient')}}" method="post" class=" px-8 h-4/5 w-full md:px-0 md:h-full md:w-3/5 md:pl-3">@csrf
                 <a class="p-3 block text-blue-900 underline underline-offset-8 hover:text-blue-500" href="{{route('get.patients')}}">Back Home</a>
                 <h3 class="text-4xl font-bold my-8">Patient Registration</h3>
